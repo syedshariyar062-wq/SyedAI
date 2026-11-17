@@ -1,28 +1,32 @@
-v<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Syed AI - Sovereign Assistant</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body {
+        html, body {
             background-color: #0b0f19;
             color: #f8fafc;
-            display: flex;
-            flex-direction: column;
+            width: 100%;
             height: 100vh;
             overflow: hidden;
+            position: fixed;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
         }
         header {
             background: #111827;
-            padding: 15px;
+            padding: 14px;
             text-align: center;
             border-bottom: 1px solid #1f2937;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             color: #38bdf8;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            flex-shrink: 0;
         }
         .chat-container {
             flex: 1;
@@ -31,13 +35,14 @@ v<!DOCTYPE html>
             display: flex;
             flex-direction: column;
             gap: 12px;
+            -webkit-overflow-scrolling: touch;
         }
         .message {
-            max-width: 80%;
-            padding: 12px 16px;
+            max-width: 85%;
+            padding: 10px 14px;
             border-radius: 12px;
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.4;
             word-wrap: break-word;
         }
         .user-message {
@@ -55,16 +60,18 @@ v<!DOCTYPE html>
         }
         .input-area {
             background: #111827;
-            padding: 12px;
+            padding: 10px 12px;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             border-top: 1px solid #1f2937;
+            flex-shrink: 0;
+            align-items: center;
         }
         input {
             flex: 1;
             background: #1f2937;
             border: 1px solid #374151;
-            padding: 12px 16px;
+            padding: 12px 14px;
             border-radius: 25px;
             color: white;
             font-size: 14px;
@@ -75,13 +82,12 @@ v<!DOCTYPE html>
             background: #38bdf8;
             color: #0b0f19;
             border: none;
-            padding: 0 20px;
+            padding: 0 18px;
+            height: 42px;
             border-radius: 25px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
         }
-        button:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
@@ -105,7 +111,6 @@ v<!DOCTYPE html>
 
             if (text === '') return;
 
-            // User Message Add
             const userDiv = document.createElement('div');
             userDiv.className = 'message user-message';
             userDiv.textContent = text;
@@ -114,14 +119,13 @@ v<!DOCTYPE html>
             inputField.value = '';
             chatContainer.scrollTop = chatContainer.scrollHeight;
 
-            // AI Simulated Response (Later we can wire local APIs or custom logic)
             setTimeout(() => {
                 const aiDiv = document.createElement('div');
                 aiDiv.className = 'message ai-message';
                 aiDiv.textContent = "আপনার কথাটি পেয়েছি: \"" + text + "\"। সিস্টেম সম্পূর্ণ স্বাধীন ও সচল আছে!";
                 chatContainer.appendChild(aiDiv);
                 chatContainer.scrollTop = chatContainer.scrollHeight;
-            }, 600);
+            }, 500);
         }
 
         function handleKeyPress(event) {
